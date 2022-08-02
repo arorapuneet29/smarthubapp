@@ -21,15 +21,17 @@ const appSlice = createSlice({
   reducers: {
     authenticate: (state, { payload }) => {
       state.loggedIn = payload.loggedIn
-      state.checked = payload.checked
     },
     saveMe: (state, { payload }) => {
       state.me = payload.me
+    },
+    introDone: (state, { payload }) => {
+      state.checked = payload.checked
     },
   },
 })
 
 export const { action } = appSlice
-export const { authenticate, saveMe } = appSlice.actions
+export const { authenticate, saveMe, introDone } = appSlice.actions
 
 export default appSlice.reducer

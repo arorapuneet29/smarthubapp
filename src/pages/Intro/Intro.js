@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { introDone } from 'slices/app.slice'
 
 import {
   SafeAreaView,
@@ -11,15 +13,17 @@ import {
 
 import AppIntroSlider from 'react-native-app-intro-slider'
 
-const App = () => {
+const AppIntro = () => {
   const [showRealApp, setShowRealApp] = useState(false)
 
   const onDone = () => {
     setShowRealApp(true)
+    dispatch(introDone({ checked: true }))
   }
   const onSkip = () => {
     setShowRealApp(true)
   }
+  const dispatch = useDispatch()
 
   const RenderItem = ({ item }) => (
     <View
@@ -68,7 +72,7 @@ const App = () => {
   )
 }
 
-export default App
+export default AppIntro
 
 const styles = StyleSheet.create({
   container: {
@@ -124,7 +128,7 @@ const slides = [
   {
     key: 's2',
     title: 'Get started by adding device here',
-    text: 'Upto 25% off on Domestic Flights',
+    text: 'Adding new device to expand your home security is as easy as 3 taps!',
     image: {
       uri: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/intro_mobile_recharge.png',
     },
@@ -132,8 +136,8 @@ const slides = [
   },
   {
     key: 's3',
-    title: 'Great Offers',
-    text: 'Enjoy Great offers on our all services',
+    title: 'Manage your sensors individually!',
+    text: 'Have certain senrors stay vigilant for intruders while you are at home!',
     image: {
       uri: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/intro_mobile_recharge.png',
     },

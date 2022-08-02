@@ -3,6 +3,8 @@ import { View } from 'react-native'
 import { Provider } from 'react-redux'
 import store from 'utils/store'
 import 'utils/ignore'
+import { persistStore } from 'redux-persist'
+import { PersistGate } from 'redux-persist/integration/react'
 
 // assets
 import { imageAssets } from 'theme/images'
@@ -21,10 +23,13 @@ const App = () => {
   useEffect(() => {
     handleLoadAssets()
   }, [])
+  const persistor = persistStore(store)
 
   return didLoad ? (
     <Provider store={store}>
-      <Navigator />
+      <PersistGate loading={null} persistor={persistor}>
+        <Navigator />
+      </PersistGate>
     </Provider>
   ) : (
     <View />
