@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { View } from 'react-native'
+import { NativeBaseProvider } from 'native-base'
+
 import { Provider } from 'react-redux'
 import store from 'utils/store'
 import 'utils/ignore'
@@ -28,7 +30,9 @@ const App = () => {
   return didLoad ? (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <Navigator />
+        <NativeBaseProvider>
+          <Navigator />
+        </NativeBaseProvider>
       </PersistGate>
     </Provider>
   ) : (
