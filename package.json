@@ -11,6 +11,7 @@
     "test": "node_modules/.bin/jest --passWithNoTests"
   },
   "dependencies": {
+    "@native-base/expo-template": "^1.2.1",
     "@react-native-async-storage/async-storage": "^1.17.7",
     "@react-navigation/bottom-tabs": "^5.11.2",
     "@react-navigation/drawer": "^5.11.4",
@@ -26,6 +27,7 @@
     "global": "^4.4.0",
     "jest": "^26.6.3",
     "moment": "^2.29.2",
+    "native-base": "^3.4.9",
     "prop-types": "^15.7.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
