@@ -5,6 +5,7 @@ import store from 'utils/store'
 import 'utils/ignore'
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
+import { Provider as PaperProvider } from 'react-native-paper'
 
 // assets
 import { imageAssets } from 'theme/images'
@@ -28,7 +29,9 @@ const App = () => {
   return didLoad ? (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <Navigator />
+        <PaperProvider>
+          <Navigator />
+        </PaperProvider>
       </PersistGate>
     </Provider>
   ) : (

@@ -7,6 +7,7 @@ import IntroScreen from 'pages/Intro'
 import Details from 'pages/Details'
 import HeaderLeft from './HeaderLeft'
 import HeaderTitle from './HeaderTitle'
+import AppBar from '../../components/AppBar/index'
 
 // ------------------------------------
 // Constants
@@ -37,20 +38,29 @@ export const HomeNavigator = () => (
     <Stack.Screen
       name="Home"
       component={Home}
-      options={({ navigation }) => ({
-        title: 'Home',
-        headerLeft: () => <HeaderLeft navigation={navigation} />,
-        headerTitle: () => <HeaderTitle />,
-      })}
+      // options={({ navigation }) => ({
+      //   title: 'Home',
+      //   headerLeft: () => <HeaderLeft navigation={navigation} />,
+      //   headerTitle: () => <HeaderTitle />,
+      // })}
+      screenOptions={{
+        header: (props) => <AppBar {...props} />,
+      }}
     />
     <Stack.Screen
       name="Details"
       component={Details}
-      options={({ navigation }) => ({
-        title: 'Home',
-        headerLeft: () => <HeaderLeft navigation={navigation} />,
-        headerTitle: () => <HeaderTitle />,
-      })}
+      // navigation.navigate('Details', { from: 'Home' })
+      // options={({ navigation }) => ({
+      //   title: 'Home',
+      //   headerLeft: () => <HeaderLeft navigation={navigation} />,
+      //   headerTitle: () => <HeaderTitle />,
+      // })}
+      screenOptions={{
+        header: ({ navigation }) => (
+          <AppBar navigation={navigation} title="Details" back />
+        ),
+      }}
     />
   </Stack.Navigator>
 )
