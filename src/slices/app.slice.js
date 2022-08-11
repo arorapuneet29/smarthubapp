@@ -8,6 +8,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   checked: false,
   loggedIn: false,
+  hub: [],
   me: {},
 }
 
@@ -27,6 +28,9 @@ const appSlice = createSlice({
     },
     introDone: (state, { payload }) => {
       state.checked = payload.checked
+    },
+    addHub: (state, { payload }) => {
+      state.hub = state.hub.push(payload.data)
     },
   },
 })

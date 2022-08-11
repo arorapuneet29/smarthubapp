@@ -11,6 +11,7 @@ import { Provider as PaperProvider } from 'react-native-paper'
 import { imageAssets } from 'theme/images'
 import { fontAssets } from 'theme/fonts'
 import Navigator from './navigator'
+// import console = require('console');
 
 const App = () => {
   const [didLoad, setDidLoad] = useState(false)

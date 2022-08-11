@@ -4,10 +4,9 @@ import { colors } from 'theme'
 import Home from 'pages/Home'
 import Profile from 'pages/Profile'
 import IntroScreen from 'pages/Intro'
-import Details from 'pages/Details'
-import HeaderLeft from './HeaderLeft'
-import HeaderTitle from './HeaderTitle'
 import AppBar from '../../components/AppBar/index'
+import SelectHub from '../../pages/SelectHub/index'
+import AddHub from '../../pages/AddHub/AddHub'
 
 // ------------------------------------
 // Constants
@@ -43,13 +42,17 @@ export const HomeNavigator = () => (
       //   headerLeft: () => <HeaderLeft navigation={navigation} />,
       //   headerTitle: () => <HeaderTitle />,
       // })}
-      screenOptions={{
-        header: (props) => <AppBar {...props} />,
-      }}
+      options={({ navigation }) => ({
+        title: 'Home',
+        // headerLeft: () => <HeaderLeft navigation={navigation} />,
+        header: () => (
+          <AppBar navigation={navigation} title="Home" plus setting />
+        ),
+      })}
     />
     <Stack.Screen
-      name="Details"
-      component={Details}
+      name="AddHub"
+      component={AddHub}
       // navigation.navigate('Details', { from: 'Home' })
       // options={({ navigation }) => ({
       //   title: 'Home',
@@ -58,7 +61,7 @@ export const HomeNavigator = () => (
       // })}
       screenOptions={{
         header: ({ navigation }) => (
-          <AppBar navigation={navigation} title="Details" back />
+          <AppBar navigation={navigation} title="Add Hub" back plus />
         ),
       }}
     />
@@ -67,24 +70,54 @@ export const HomeNavigator = () => (
 
 export const ProfileNavigator = () => (
   <Stack.Navigator
-    initialRouteName="Profile"
+    initialRouteName="SelectHub"
     headerMode="screen"
     screenOptions={navigationProps}
   >
     <Stack.Screen
-      name="Profile"
-      component={Profile}
+      name="SelectHub"
+      component={SelectHub}
       options={({ navigation }) => ({
-        title: 'Profile',
-        headerLeft: () => <HeaderLeft navigation={navigation} />,
-        headerTitle: () => <HeaderTitle />,
+        title: 'Home',
+        // headerLeft: () => <HeaderLeft navigation={navigation} />,
+        header: () => (
+          <AppBar
+            navigation={navigation}
+            title="Select your hub"
+            back
+            plus
+            setting
+          />
+        ),
       })}
+      // screenOptions={{
+      //   header: ({ navigation }) => (
+      //     <AppBar
+      //       navigation={navigation}
+      //       title="Select your hub"
+      //       back
+      //       plus
+      //       setting
+      //     />
+      //   ),
+      // }}
+      // screenOptions={{
+      //   header: (props) => <AppBar {...props} />,
+      // }}
     />
     <Stack.Screen
-      name="Details"
-      component={Details}
-      options={{
-        title: 'Details',
+      name="Profile"
+      component={Profile}
+      screenOptions={{
+        header: ({ navigation }) => (
+          <AppBar
+            navigation={navigation}
+            title="Select your hub"
+            back
+            plus
+            setting
+          />
+        ),
       }}
     />
   </Stack.Navigator>

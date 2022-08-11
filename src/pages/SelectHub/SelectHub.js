@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { StyleSheet, Text, View, StatusBar } from 'react-native'
 import Button from 'components/Button'
 import { colors } from 'theme'
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
 })
 
-const Home = ({ navigation }) => {
+const SelectHub = ({ navigation }) => {
   const { hub } = useSelector((state) => state.app)
   return hub.length > 0 ? (
     <View style={styles.root}>
@@ -37,7 +37,7 @@ const Home = ({ navigation }) => {
   ) : (
     <View style={styles.root}>
       <StatusBar barStyle="light-content" />
-      <Text style={styles.title}>Not hub added</Text>
+      <Text style={styles.title}>No hub is been added</Text>
       <Button
         title="Add new hub"
         color="white"
@@ -50,14 +50,14 @@ const Home = ({ navigation }) => {
   )
 }
 
-Home.propTypes = {
+SelectHub.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
   }),
 }
 
-Home.defaultProps = {
+SelectHub.defaultProps = {
   navigation: { navigate: () => null },
 }
 
-export default Home
+export default SelectHub
