@@ -20,6 +20,7 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
+    'linebreak-style': 0,
     semi: [2, 'never'],
     'react/jsx-filename-extension': 'off',
     'react/jsx-one-expression-per-line': 'off',
