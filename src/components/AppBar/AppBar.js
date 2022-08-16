@@ -4,7 +4,9 @@ import FontIcon from 'react-native-vector-icons/FontAwesome5'
 import { StyleSheet, View } from 'react-native'
 import { colors } from 'theme'
 
-function CustomAppBar({ navigation, back, title, plus, setting }) {
+function CustomAppBar({
+  navigation, back, title, plus, setting,
+}) {
   // console.log(object(FontIcon))
   return (
     <Appbar.Header style={styles.root}>
