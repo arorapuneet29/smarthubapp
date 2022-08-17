@@ -12,8 +12,10 @@ import {
 } from 'react-native'
 
 import AppIntroSlider from 'react-native-app-intro-slider'
+import * as slider from 'react-native-app-intro-slider'
 
 const AppIntro = () => {
+  console.log(slider, '--slider')
   const [showRealApp, setShowRealApp] = useState(false)
 
   const onDone = () => {

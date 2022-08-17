@@ -2,13 +2,14 @@ import React from 'react'
 import { View } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import FontIcon from 'react-native-vector-icons/FontAwesome5'
+import * as PP from '@react-navigation/bottom-tabs'
 import { colors } from 'theme'
 
 // stack navigators
 import { HomeNavigator, ProfileNavigator } from '../Stacks'
 
 const Tab = createBottomTabNavigator()
-
+console.log(PP, '--createBottomTabNavigator')
 const TabNavigator = () => (
   <Tab.Navigator
     screenOptions={({ route }) => ({
