@@ -5,7 +5,7 @@ import { Modal as BaseModal, View } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import { colors } from 'theme'
-import { Text } from '.'
+import Text from '../Text'
 
 class Modal extends React.Component {
   constructor(props) {
@@ -89,11 +89,7 @@ class Modal extends React.Component {
 
     return (
       <View style={styles.centeredView}>
-        <BaseModal
-          animationType="slide"
-          transparent
-          visible={modalVisible}
-        >
+        <BaseModal animationType="slide" transparent visible={modalVisible}>
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               {counter >= 100 ? (

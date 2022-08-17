@@ -2,7 +2,7 @@ import React from 'react'
 import { View, TextInput } from 'react-native'
 import { ScaledSheet } from 'react-native-size-matters'
 import colors from '../../theme/colors'
-import { Text } from '../common'
+import Text from '../Text'
 
 const FormField = ({ icon, title, ...otherProps }) => (
   <View style={styles.container}>

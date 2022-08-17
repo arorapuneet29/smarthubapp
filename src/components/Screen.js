@@ -11,8 +11,7 @@ function Screen({ children, style }) {
 const styles = ScaledSheet.create({
   container: {
     backgroundColor: colors.lightGray,
-    paddingHorizontal: '15@s',
-    paddingVertical: '25@s',
+    padding: '20@s',
     flex: 1,
   },
 })

@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
 
 const Home = ({ navigation }) => {
   const { hub } = useSelector((state) => state.app)
+  console.log(hub, 'hubs')
   return hub.length > 0 ? (
     <View style={styles.root}>
       <StatusBar barStyle="light-content" />

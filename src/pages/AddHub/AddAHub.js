@@ -5,16 +5,23 @@ import { ScaledSheet } from 'react-native-size-matters'
 import * as Yup from 'yup'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
-import Screen from '../components/common/Screen'
-import { Text } from '../components/common'
-import { AppFormField, Form } from '../components/form'
-import colors from '../theme/colors'
+import Screen from '../../components/Screen'
+import Text from '../../components/Text'
+import { AppFormField, Form, SubmitForm } from '../../components/form'
+import colors from '../../theme/colors'
+import { addHub } from '../../slices/app.slice'
+import store from '../../utils/store'
 
-function AddAHub({ route }) {
+function AddAHub({ route, navigation }) {
   const validationSchema = Yup.object().shape({
     name: Yup.string().required().label('Hub name'),
   })
-  const { phoneNo } = route.params
+  const { phoneNo, serialNo } = route.params
+
+  const onSubmit = ({ name }) => {
+    store.dispatch(addHub({ data: { phoneNo, serialNo, hubName: name } }))
+    navigation.navigate('Home')
+  }
   return (
     <Screen style={styles.screen}>
       <View style={styles.sectionOne}>
@@ -32,9 +39,7 @@ function AddAHub({ route }) {
         <View style={styles.form}>
           <Form
             initialValues={{ name: '' }}
-            onSubmit={() => {
-              console.log('Submitted')
-            }}
+            onSubmit={onSubmit}
             validationSchema={validationSchema}
           >
             <AppFormField
@@ -45,20 +50,24 @@ function AddAHub({ route }) {
               name="name"
               keyboardType="default"
             />
+            <SubmitForm
+              title="continue to add sensors"
+              btnText={styles.btnText}
+              btnContainer={styles.btnContainer}
+            />
           </Form>
         </View>
       </View>
-      <TouchableOpacity onPress={() => {}}>
+      {/* <TouchableOpacity onPress={() => {}}>
         <Text content="continue to add sensors" style={styles.continueText} />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </Screen>
   )
 }
 
 const styles = ScaledSheet.create({
   screen: {
-    paddingHorizontal: 0,
-    paddingVertical: 0,
+    padding: 0,
   },
   sectionOne: {
     backgroundColor: colors.grayBg,
@@ -90,7 +99,12 @@ const styles = ScaledSheet.create({
   form: {
     paddingHorizontal: '15@s',
   },
-  continueText: {
+  btnContainer: {
+    backgroundColor: 'transparent',
+    width: '100%',
+    marginTop: '130@s',
+  },
+  btnText: {
     marginVertical: '10@s',
     fontSize: '16@s',
     textTransform: 'uppercase',
@@ -105,6 +119,9 @@ AddAHub.propTypes = {
     serialNo: PropTypes.string,
     phoneNo: PropTypes.string,
   }),
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }),
 }
 
 AddAHub.defaultProps = {
@@ -112,6 +129,7 @@ AddAHub.defaultProps = {
     serialNo: '',
     phoneNo: '',
   },
+  navigation: { navigate: () => null },
 }
 
 export default AddAHub

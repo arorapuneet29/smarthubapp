@@ -4,9 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import IntroScreen from 'pages/Intro'
 import { authenticate } from 'slices/app.slice'
 
-// import DrawerNavigator from './Drawer'
+import DrawerNavigator from './Drawer'
 // import { HomeNavigator, ProfileNavigator } from './Stacks'
-import { TempNavigator } from './Stacks/Stacks'
 
 const Navigator = () => {
   const { checked, loggedIn } = useSelector((state) => state.app)
@@ -21,7 +20,7 @@ const Navigator = () => {
 
   return checked ? (
     <NavigationContainer>
-      <TempNavigator />
+      <DrawerNavigator />
     </NavigationContainer>
   ) : (
     <IntroScreen />

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { View } from 'react-native'
 import { ScaledSheet } from 'react-native-size-matters'
 import { colors } from 'theme'
-import Text from './Text'
+import Text from '../Text'
 
 function Listing({ itemLists }) {
   return (

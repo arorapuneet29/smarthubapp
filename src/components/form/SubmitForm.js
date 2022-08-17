@@ -3,15 +3,17 @@ import React from 'react'
 import { View, TouchableOpacity } from 'react-native'
 import { ScaledSheet } from 'react-native-size-matters'
 import colors from '../../theme/colors'
-import { Text } from '../common'
+import Text from '../Text'
 
-const SubmitForm = ({ title, style }) => {
+const SubmitForm = ({
+  title, btnContainer, btnText, style,
+}) => {
   const { handleSubmit } = useFormikContext()
   return (
     <View style={[styles.container, style]}>
       <TouchableOpacity onPress={handleSubmit}>
-        <View style={styles.btnContainer}>
-          <Text style={styles.btnText} content={title} />
+        <View style={[styles.btnContainer, btnContainer]}>
+          <Text style={[styles.btnText, btnText]} content={title} />
         </View>
       </TouchableOpacity>
     </View>

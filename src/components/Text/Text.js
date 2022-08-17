@@ -4,7 +4,7 @@ import { Text as BaseText } from 'react-native'
 import { ScaledSheet } from 'react-native-size-matters'
 import { colors } from 'theme'
 
-function Text({ content, style }) {
+function Text({ content, style = {} }) {
   return <BaseText style={[styles.content, style]}>{content}</BaseText>
 }
 

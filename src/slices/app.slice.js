@@ -30,12 +30,16 @@ const appSlice = createSlice({
       state.checked = payload.checked
     },
     addHub: (state, { payload }) => {
-      state.hub = state.hub.push(payload.data)
+      const hubs = state.hub === 1 ? [] : state.hub
+      hubs.push(payload.data)
+      state.hub = hubs
     },
   },
 })
 
 export const { action } = appSlice
-export const { authenticate, saveMe, introDone } = appSlice.actions
+export const {
+  authenticate, saveMe, introDone, addHub,
+} = appSlice.actions
 
 export default appSlice.reducer
