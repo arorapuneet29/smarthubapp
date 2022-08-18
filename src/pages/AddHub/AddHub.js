@@ -87,6 +87,7 @@ import Listing from '../../components/Listing'
 import { AppFormField, Form, SubmitForm } from '../../components/form'
 import Screen from '../../components/Screen'
 import Modal from '../../components/Modal'
+import colors from '../../theme/colors'
 
 function AddHub({ navigation }) {
   const lists = [
@@ -105,6 +106,7 @@ function AddHub({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false)
   const initial = { serialNo: '', phoneNo: '' }
   const [details, setDetails] = useState(initial)
+  const [disable, setDisable] = useState(true)
 
   const validationSchema = Yup.object().shape({
     serialNo: Yup.string().required().label('Serial no.'),
@@ -119,6 +121,7 @@ function AddHub({ navigation }) {
     setModalVisible(false)
     navigation.navigate(path, { ...details })
   }
+
   return (
     <Screen>
       <Text
@@ -129,9 +132,10 @@ function AddHub({ navigation }) {
         <Listing itemLists={lists} />
       </View>
       <Form
-        initialValues={details}
+        initialValues={initial}
         onSubmit={onSubmit}
         validationSchema={validationSchema}
+        validate={({ serialNo, phoneNo }) => (serialNo && phoneNo ? setDisable(false) : setDisable(true))}
       >
         <AppFormField
           title="Hub Serial No."
@@ -151,7 +155,12 @@ function AddHub({ navigation }) {
           name="phoneNo"
         />
 
-        <SubmitForm title="Add Hub" />
+        <SubmitForm
+          title="Add Hub"
+          isDisable={disable}
+          btnContainer={!disable && styles.enableBtn}
+          btnText={!disable && styles.btnText}
+        />
       </Form>
       {modalVisible && (
         <Modal
@@ -182,6 +191,12 @@ const styles = ScaledSheet.create({
   heading: {
     textAlign: 'justify',
     marginTop: '10@s',
+  },
+  enableBtn: {
+    backgroundColor: colors.darkGray,
+  },
+  btnText: {
+    color: 'white',
   },
 })
 

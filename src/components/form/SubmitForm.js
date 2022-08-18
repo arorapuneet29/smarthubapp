@@ -6,12 +6,12 @@ import colors from '../../theme/colors'
 import Text from '../Text'
 
 const SubmitForm = ({
-  title, btnContainer, btnText, style,
+  title, btnContainer, btnText, style, isDisable,
 }) => {
   const { handleSubmit } = useFormikContext()
   return (
     <View style={[styles.container, style]}>
-      <TouchableOpacity onPress={handleSubmit}>
+      <TouchableOpacity onPress={handleSubmit} disabled={isDisable}>
         <View style={[styles.btnContainer, btnContainer]}>
           <Text style={[styles.btnText, btnText]} content={title} />
         </View>
