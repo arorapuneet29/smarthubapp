@@ -6,7 +6,11 @@ import Profile from 'pages/Profile'
 import IntroScreen from 'pages/Intro'
 import AppBar from '../../components/AppBar/index'
 import SelectHub from '../../pages/SelectHub/index'
-import AddHub from '../../pages/AddHub/AddHub'
+// import AddHub from '../../pages/AddHub/AddHub'
+
+// temp
+import AddHub from '../../screens/AddHub'
+import AddAHub from '../../screens/AddAHub'
 
 // ------------------------------------
 // Constants
@@ -18,6 +22,7 @@ const navigationProps = {
   headerTintColor: 'white',
   headerStyle: { backgroundColor: colors.darkPurple },
   headerTitleStyle: { fontSize: 18 },
+  headerTitleAlign: 'center',
 }
 
 // ------------------------------------
@@ -50,7 +55,7 @@ export const HomeNavigator = () => (
         ),
       })}
     />
-    <Stack.Screen
+    {/* <Stack.Screen
       name="AddHub"
       component={AddHub}
       // navigation.navigate('Details', { from: 'Home' })
@@ -64,7 +69,7 @@ export const HomeNavigator = () => (
           <AppBar navigation={navigation} title="Add Hub" back plus />
         ),
       }}
-    />
+    /> */}
   </Stack.Navigator>
 )
 
@@ -119,6 +124,21 @@ export const ProfileNavigator = () => (
           />
         ),
       }}
+    />
+  </Stack.Navigator>
+)
+
+export const TempNavigator = () => (
+  <Stack.Navigator
+    initialRouteName="AddHub"
+    headerMode="screen"
+    screenOptions={navigationProps}
+  >
+    <Stack.Screen name="AddHub" component={AddHub} />
+    <Stack.Screen
+      name="AddAHub"
+      component={AddAHub}
+      options={{ title: 'Add A Hub' }}
     />
   </Stack.Navigator>
 )
