@@ -5,10 +5,11 @@ import IntroScreen from 'pages/Intro'
 import { authenticate } from 'slices/app.slice'
 
 import DrawerNavigator from './Drawer'
+import { InitialNavigator } from './Stacks/Stacks'
 // import { HomeNavigator, ProfileNavigator } from './Stacks'
 
 const Navigator = () => {
-  const { checked, loggedIn } = useSelector((state) => state.app)
+  const { checked, loggedIn, hub } = useSelector((state) => state.app)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -20,7 +21,11 @@ const Navigator = () => {
 
   return checked ? (
     <NavigationContainer>
-      <DrawerNavigator />
+      {hub?.length === 0 || hub === 1 ? (
+        <InitialNavigator />
+      ) : (
+        <DrawerNavigator />
+      )}
     </NavigationContainer>
   ) : (
     <IntroScreen />

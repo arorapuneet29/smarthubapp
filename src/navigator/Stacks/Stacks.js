@@ -134,17 +134,14 @@ export const ProfileNavigator = () => (
   </Stack.Navigator>
 )
 
-// export const TempNavigator = () => (
-//   <Stack.Navigator
-//     initialRouteName="AddHub"
-//     headerMode="screen"
-//     screenOptions={navigationProps}
-//   >
-//     <Stack.Screen name="AddHub" component={AddHub} />
-//     <Stack.Screen
-//       name="AddAHub"
-//       component={AddAHub}
-//       options={{ title: 'Add A Hub' }}
-//     />
-//   </Stack.Navigator>
-// )
+export const InitialNavigator = () => (
+  <Stack.Navigator
+    initialRouteName="AddHub"
+    headerMode="screen"
+    screenOptions={navigationProps}
+  >
+    <Stack.Screen name="AddHub" component={AddHub} />
+    <Stack.Screen name="AddAHub" component={AddAHub} />
+    <Stack.Screen name="Home" component={HomeNavigator} />
+  </Stack.Navigator>
+)
