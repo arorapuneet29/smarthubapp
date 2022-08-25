@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { View } from 'react-native'
-import { ScaledSheet } from 'react-native-size-matters'
+import { StyleSheet, View } from 'react-native'
 import { colors } from 'theme'
 import Text from '../Text'
+import scale from '../../utils/scale'
 
 function Listing({ itemLists }) {
   return (
@@ -18,30 +18,30 @@ function Listing({ itemLists }) {
   )
 }
 
-const styles = ScaledSheet.create({
+const styles = StyleSheet.create({
   container: {
-    paddingVertical: '15@s',
-    paddingHorizontal: '20@s',
+    paddingVertical: scale(15),
+    paddingHorizontal: scale(20),
     alignItems: 'flex-start',
   },
   itemContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: '6@s',
+    marginVertical: scale(6),
   },
   itemText: {
-    fontSize: '12@s',
+    fontSize: scale(12),
     textAlign: 'justify',
   },
   circle: {
-    width: '15@s',
-    height: '15@s',
+    width: scale(15),
+    height: scale(15),
     backgroundColor: colors.darkGray,
-    borderRadius: '8@s',
-    marginRight: '15@s',
+    borderRadius: scale(8),
+    marginRight: scale(15),
   },
   content: {
-    fontSize: '14@s',
+    fontSize: scale(14),
     color: colors.darkGray,
     fontWeight: '900',
   },

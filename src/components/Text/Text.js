@@ -1,16 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Text as BaseText } from 'react-native'
-import { ScaledSheet } from 'react-native-size-matters'
+import { StyleSheet, Text as BaseText } from 'react-native'
 import { colors } from 'theme'
+import scale from '../../utils/scale'
 
 function Text({ content, style = {} }) {
   return <BaseText style={[styles.content, style]}>{content}</BaseText>
 }
 
-const styles = ScaledSheet.create({
+const styles = StyleSheet.create({
   content: {
-    fontSize: '14@s',
+    fontSize: scale(14),
     color: colors.darkGray,
     fontWeight: '500',
   },

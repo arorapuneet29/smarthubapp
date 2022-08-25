@@ -8,6 +8,10 @@ import AppBar from '../../components/AppBar/index'
 import SelectHub from '../../pages/SelectHub/index'
 import AddHub from '../../pages/AddHub'
 import AddAHub from '../../pages/AddHub/AddAHub'
+import Hub from '../../pages/Hub'
+import Sensors from '../../pages/Sensors/Sensors'
+import AppIcon from '../../components/AppIcon/AppIcon'
+import AddSensor from '../../pages/AddSensor/AddSensor'
 
 // ------------------------------------
 // Constants
@@ -75,6 +79,32 @@ export const HomeNavigator = () => (
           <AppBar navigation={navigation} title="Add A Hub" back plus />
         ),
       }}
+    />
+    <Stack.Screen
+      name="Hub"
+      component={Hub}
+      screenOptions={{
+        header: ({ navigation }) => <AppBar navigation={navigation} />,
+      }}
+      options={({ route }) => ({
+        title: route.params?.hubName,
+      })}
+    />
+    <Stack.Screen
+      name="ManageSensor"
+      component={Sensors}
+      options={({ navigation }) => ({
+        title: 'Manage Sensor',
+        headerRight: () => (
+          <AppIcon onPress={() => navigation.navigate('AddSensor')} />
+        ),
+      })}
+    />
+
+    <Stack.Screen
+      name="AddSensor"
+      component={AddSensor}
+      options={{ title: 'Add A Sensor' }}
     />
   </Stack.Navigator>
 )

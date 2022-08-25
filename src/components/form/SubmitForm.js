@@ -1,8 +1,8 @@
 import { useFormikContext } from 'formik'
 import React from 'react'
-import { View, TouchableOpacity } from 'react-native'
-import { ScaledSheet } from 'react-native-size-matters'
+import { View, TouchableOpacity, StyleSheet } from 'react-native'
 import colors from '../../theme/colors'
+import scale from '../../utils/scale'
 import Text from '../Text'
 
 const SubmitForm = ({
@@ -19,22 +19,22 @@ const SubmitForm = ({
     </View>
   )
 }
-const styles = ScaledSheet.create({
+const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: '14@s',
+    marginTop: scale(14),
   },
   btnContainer: {
-    height: '40@s',
+    height: scale(40),
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.button,
     borderRadius: 10,
-    width: '100@s',
+    width: scale(100),
   },
   btnText: {
-    fontSize: '14@s',
+    fontSize: scale(14),
     color: colors.gray,
     fontWeight: '600',
     textTransform: 'uppercase',

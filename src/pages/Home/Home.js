@@ -23,10 +23,10 @@ const styles = StyleSheet.create({
 
 const Home = ({ navigation }) => {
   const { hub } = useSelector((state) => state.app)
-  console.log(hub, 'hubs')
+
   return hub.length > 0 ? (
     <View style={styles.root}>
-      <StatusBar barStyle="light-content" />
+      {/* <StatusBar barStyle="light-content" />
       <Text style={styles.title}>hub list here</Text>
       <Button
         title="Add new hub"
@@ -35,7 +35,17 @@ const Home = ({ navigation }) => {
         onPress={() => {
           navigation.navigate('AddHub', { from: 'Home' })
         }}
-      />
+      /> */}
+      <View>
+        {hub?.map((item) => (
+          <View key={item.hubId} style={{ marginTop: 10 }}>
+            <Button
+              title={item?.hubName}
+              onPress={() => navigation.navigate('Hub', { ...item })}
+            />
+          </View>
+        ))}
+      </View>
     </View>
   ) : (
     <View style={styles.root}>

@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { ScaledSheet } from 'react-native-size-matters'
-import { Modal as BaseModal, View } from 'react-native'
+import { Modal as BaseModal, StyleSheet, View } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import { colors } from 'theme'
 import Text from '../Text'
+import scale from '../../utils/scale'
 
 class Modal extends React.Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class Modal extends React.Component {
   }
 
   render() {
-    const styles = ScaledSheet.create({
+    const styles = StyleSheet.create({
       centeredView: {
         flex: 1,
         justifyContent: 'center',
@@ -45,8 +45,8 @@ class Modal extends React.Component {
         width: '90%',
       },
       heading: {
-        marginVertical: '6@s',
-        fontSize: '18@s',
+        marginVertical: scale(6),
+        fontSize: scale(18),
         color: 'black',
         fontWeight: 'bold',
         textTransform: 'uppercase',
@@ -57,7 +57,7 @@ class Modal extends React.Component {
         height: 8,
         backgroundColor: 'white',
         borderRadius: 20,
-        marginVertical: '10@s',
+        marginVertical: scale(10),
 
         elevation: 5,
       },
@@ -70,7 +70,7 @@ class Modal extends React.Component {
       innerTextContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        paddingVertical: '10@s',
+        paddingVertical: scale(10),
       },
       iconContainer: {
         width: 60,
@@ -79,7 +79,7 @@ class Modal extends React.Component {
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: colors.darkBlue,
-        marginVertical: '10@s',
+        marginVertical: scale(10),
       },
     })
     const { modalVisible, details, onNavigate } = this.props

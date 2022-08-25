@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { TouchableOpacity, View } from 'react-native'
-import { ScaledSheet } from 'react-native-size-matters'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import * as Yup from 'yup'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
@@ -11,6 +10,7 @@ import { AppFormField, Form, SubmitForm } from '../../components/form'
 import colors from '../../theme/colors'
 import { addHub } from '../../slices/app.slice'
 import store from '../../utils/store'
+import scale from '../../utils/scale'
 
 function AddAHub({ route, navigation }) {
   const validationSchema = Yup.object().shape({
@@ -65,7 +65,7 @@ function AddAHub({ route, navigation }) {
   )
 }
 
-const styles = ScaledSheet.create({
+const styles = StyleSheet.create({
   screen: {
     padding: 0,
   },
@@ -74,39 +74,39 @@ const styles = ScaledSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
-    height: '200@s',
+    height: scale(200),
   },
   addPhoto: {
-    marginBottom: '15@s',
+    marginBottom: scale(15),
   },
   sectionTwo: {
-    height: '350@s',
+    height: scale(350),
   },
   content: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: '15@s',
+    marginVertical: scale(15),
   },
   phoneNo: {
-    fontSize: '20@s',
+    fontSize: scale(20),
     color: 'black',
     letterSpacing: 2,
   },
   date: {
-    fontSize: '12@s',
-    marginVertical: '2@s',
+    fontSize: scale(12),
+    marginVertical: scale(2),
   },
   form: {
-    paddingHorizontal: '15@s',
+    paddingHorizontal: scale(15),
   },
   btnContainer: {
     backgroundColor: 'transparent',
     width: '100%',
-    marginTop: '130@s',
+    marginTop: scale(130),
   },
   btnText: {
-    marginVertical: '10@s',
-    fontSize: '16@s',
+    marginVertical: scale(10),
+    fontSize: scale(16),
     textTransform: 'uppercase',
     fontWeight: '700',
     color: colors.continueText,

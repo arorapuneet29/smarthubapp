@@ -1,7 +1,7 @@
 import React from 'react'
-import { View, TextInput } from 'react-native'
-import { ScaledSheet } from 'react-native-size-matters'
+import { View, TextInput, StyleSheet } from 'react-native'
 import colors from '../../theme/colors'
+import scale from '../../utils/scale'
 import Text from '../Text'
 
 const FormField = ({ icon, title, ...otherProps }) => (
@@ -10,13 +10,13 @@ const FormField = ({ icon, title, ...otherProps }) => (
     <TextInput style={[styles.textInput]} {...otherProps} />
   </View>
 )
-const styles = ScaledSheet.create({
+const styles = StyleSheet.create({
   container: {
     height: 50,
     borderBottomColor: colors.inputBorder,
     borderBottomWidth: 2,
-    marginVertical: '15@s',
-    marginHorizontal: '5@s',
+    marginVertical: scale(15),
+    marginHorizontal: scale(5),
   },
   title: {
     color: colors.darkGray,

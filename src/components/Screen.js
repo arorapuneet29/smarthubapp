@@ -1,17 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { ScaledSheet } from 'react-native-size-matters'
-import { ScrollView } from 'react-native'
+import { ScrollView, StyleSheet } from 'react-native'
 import { colors } from 'theme'
+import scale from '../utils/scale'
 
 function Screen({ children, style }) {
   return <ScrollView style={[styles.container, style]}>{children}</ScrollView>
 }
 
-const styles = ScaledSheet.create({
+const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.lightGray,
-    padding: '20@s',
+    padding: scale(20),
     flex: 1,
   },
 })
