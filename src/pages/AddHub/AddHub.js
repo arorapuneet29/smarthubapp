@@ -35,9 +35,28 @@ function AddHub({ navigation }) {
     phoneNo: Yup.number().required().min(10).label('Phone no.'),
   })
 
-  const onSubmit = ({ serialNo, phoneNo }) => {
+  const onSubmit = ({ phoneNo }) => {
+    const modalDetails = {
+      initial: {
+        title: 'Verifying',
+        subTitle: phoneNo,
+        type: 'loading',
+        endTime: 100,
+        footerText: [
+          'This might take a few mintutes',
+          "please don't leave the app",
+        ],
+      },
+      afterCounter: {
+        title: 'Done',
+        subTitle: phoneNo,
+        icon: 'check',
+        nextScreen: 'AddAHub',
+      },
+    }
+
+    setDetails(modalDetails)
     setModalVisible(!modalVisible)
-    setDetails({ serialNo, phoneNo })
   }
   const onNavigate = (path) => {
     setModalVisible(false)

@@ -4,14 +4,15 @@ import { colors } from 'theme'
 import Home from 'pages/Home'
 import Profile from 'pages/Profile'
 import IntroScreen from 'pages/Intro'
+import { View } from 'react-native'
 import AppBar from '../../components/AppBar/index'
 import SelectHub from '../../pages/SelectHub/index'
 import AddHub from '../../pages/AddHub'
 import AddAHub from '../../pages/AddHub/AddAHub'
 import Hub from '../../pages/Hub'
-import Sensors from '../../pages/Sensors/Sensors'
+import ManageSensor from '../../pages/ManageSensor'
 import AppIcon from '../../components/AppIcon/AppIcon'
-import AddSensor from '../../pages/AddSensor/AddSensor'
+import { InitialSensor, SensorList, AddSensor } from '../../pages/AddSensor'
 
 // ------------------------------------
 // Constants
@@ -92,17 +93,32 @@ export const HomeNavigator = () => (
     />
     <Stack.Screen
       name="ManageSensor"
-      component={Sensors}
+      component={ManageSensor}
       options={({ navigation }) => ({
         title: 'Manage Sensor',
         headerRight: () => (
-          <AppIcon onPress={() => navigation.navigate('AddSensor')} />
+          <View style={{ marginRight: 13 }}>
+            <AppIcon
+              iconName="plus"
+              onPress={() => navigation.navigate('initialSensor')}
+            />
+          </View>
         ),
       })}
     />
 
     <Stack.Screen
-      name="AddSensor"
+      name="initialSensor"
+      component={InitialSensor}
+      options={{ title: 'Add A Sensor' }}
+    />
+    <Stack.Screen
+      name="sensors"
+      component={SensorList}
+      options={{ title: 'Add A Sensor' }}
+    />
+    <Stack.Screen
+      name="addsensor"
       component={AddSensor}
       options={{ title: 'Add A Sensor' }}
     />

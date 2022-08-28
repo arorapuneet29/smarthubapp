@@ -58,9 +58,6 @@ function AddAHub({ route, navigation }) {
           </Form>
         </View>
       </View>
-      {/* <TouchableOpacity onPress={() => {}}>
-        <Text content="continue to add sensors" style={styles.continueText} />
-      </TouchableOpacity> */}
     </Screen>
   )
 }

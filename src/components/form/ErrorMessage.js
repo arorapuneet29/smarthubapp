@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     alignSelf: 'flex-start',
     marginLeft: 12,
+    marginTop: 0,
   },
 })
 

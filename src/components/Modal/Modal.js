@@ -1,6 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Modal as BaseModal, StyleSheet, View } from 'react-native'
+import {
+  Modal as BaseModal,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import { colors } from 'theme'
@@ -13,12 +18,18 @@ class Modal extends React.Component {
     this.state = {
       timer: null,
       counter: 0,
+      content: {},
     }
   }
 
   componentDidMount() {
-    const timer = setInterval(this.tick, 1000)
-    this.setState({ timer })
+    const { details } = this.props
+    if (['wifi', 'loading'].includes(details?.initial.type)) {
+      const timer = setInterval(this.tick, 1000)
+      this.setState({ timer })
+    }
+
+    this.setState({ content: details?.initial })
   }
 
   componentWillUnmount() {
@@ -27,7 +38,13 @@ class Modal extends React.Component {
   }
 
   tick = () => {
+    const { details } = this.props
+    const { counter, content } = this.state
     this.setState((prevState) => ({ counter: prevState.counter + 10 }))
+
+    if (counter >= content?.endTime) {
+      this.setState({ content: details?.afterCounter })
+    }
   }
 
   render() {
@@ -67,10 +84,10 @@ class Modal extends React.Component {
         borderRadius: 20,
         backgroundColor: colors.darkBlue,
       },
-      innerTextContainer: {
+      bodyText: {
         justifyContent: 'center',
         alignItems: 'center',
-        paddingVertical: scale(10),
+        paddingVertical: scale(15),
       },
       iconContainer: {
         width: 60,
@@ -81,42 +98,121 @@ class Modal extends React.Component {
         backgroundColor: colors.darkBlue,
         marginVertical: scale(10),
       },
-    })
-    const { modalVisible, details, onNavigate } = this.props
-    const { counter } = this.state
+      actionButton: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        width: '100%',
+        height: scale(60),
+        borderColor: colors.lightGray,
+        borderWidth: 3,
+      },
+      acceptText: {
+        color: colors.darkBlue,
+        marginHorizontal: 10,
+        fontSize: scale(14),
+        textTransform: 'uppercase',
+      },
+      rejectText: {
+        fontSize: scale(14),
+        textAlign: 'center',
+        textTransform: 'uppercase',
+      },
 
-    if (counter >= 130) onNavigate('AddAHub')
+      extraButton: {
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: scale(60),
+        borderColor: colors.lightGray,
+        borderWidth: 3,
+      },
+      extrBtnText: {
+        color: colors.darkBlue,
+        fontSize: scale(16),
+        textAlign: 'center',
+        textTransform: 'uppercase',
+      },
+    })
+    const { modalVisible, onNavigate } = this.props
+    const { counter, content } = this.state
+
+    if (counter >= (content?.endTime || 0) + 150 && content?.nextScreen) onNavigate(content?.nextScreen)
 
     return (
       <View style={styles.centeredView}>
         <BaseModal animationType="slide" transparent visible={modalVisible}>
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              {counter >= 100 ? (
-                <>
-                  <Text style={styles.heading} content="Done" />
-                  <Text content={details?.phoneNo} />
-                  <View style={styles.iconContainer}>
-                    <MaterialCommunityIcons
-                      name="check"
-                      color="white"
-                      size={60 * 0.5}
-                    />
-                  </View>
-                </>
-              ) : (
-                <>
-                  <Text style={styles.heading} content="Verifying" />
-                  <Text content={details?.phoneNo} />
-                  <View style={styles.progressContianer}>
-                    <View style={[styles.progress, { width: `${counter}%` }]} />
-                  </View>
-                  <View style={styles.innerTextContainer}>
-                    <Text content="This might take a few mintutes" />
-                    <Text content={"please don't leave the app"} />
-                  </View>
-                </>
+              <Text style={styles.heading} content={content?.title} />
+              <Text content={content?.subTitle} />
+              {content?.icon && (
+                <View style={styles.iconContainer}>
+                  <MaterialCommunityIcons
+                    name={content?.icon}
+                    color="white"
+                    size={60 * 0.5}
+                  />
+                </View>
               )}
+              {content?.bodyText && (
+                <View style={styles.bodyText}>
+                  {content.bodyText?.map((text) => (
+                    <View key={text}>
+                      <Text content={text} />
+                    </View>
+                  ))}
+                </View>
+              )}
+              {content?.type === 'loading' && (
+                <View style={styles.progressContianer}>
+                  <View style={[styles.progress, { width: `${counter}%` }]} />
+                </View>
+              )}
+              {content?.type === 'wifi' && (
+                <View style={styles.progressContianer}>
+                  <View style={[styles.progress, { width: `${counter}%` }]} />
+                </View>
+              )}
+              {content?.footerText && (
+                <View style={styles.bodyText}>
+                  {content.footerText?.map((text) => (
+                    <View key={text}>
+                      <Text content={text} />
+                    </View>
+                  ))}
+                </View>
+              )}
+              {content?.buttons?.map((btn) => (
+                <View key={btn.name} style={styles.extraButton}>
+                  <TouchableOpacity onPress={() => onNavigate(btn.url)}>
+                    <Text content={btn.name} style={styles.extrBtnText} />
+                  </TouchableOpacity>
+                </View>
+              ))}
+              {(content?.accept || content?.reject) && (
+                <View style={styles.actionButton}>
+                  <TouchableOpacity
+                    onPress={() => onNavigate(content.reject.url)}
+                  >
+                    <Text
+                      content={content.reject.name}
+                      style={styles.rejectText}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => onNavigate(content.accept.url)}
+                  >
+                    <Text
+                      content={content.accept.name}
+                      style={styles.acceptText}
+                    />
+                  </TouchableOpacity>
+                </View>
+              )}
+
+              {/* buttons
+              accept and reject */}
             </View>
           </View>
         </BaseModal>
@@ -136,10 +232,7 @@ Modal.propTypes = {
 
 Modal.defaultProps = {
   modalVisible: false,
-  details: {
-    serialNo: '',
-    phoneNo: '',
-  },
+  details: {},
   onNavigate: () => {},
 }
 export default Modal

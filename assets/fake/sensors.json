@@ -1,0 +1,38 @@
+[
+  {
+    "sensorId": 412,
+    "imageUrl": "sensor_1",
+    "name": "Sensor_1",
+    "model": "TX-232"
+  },
+  {
+    "sensorId": 422,
+    "imageUrl": "sensor_2",
+    "name": "Sensor_2",
+    "model": "WSSA-123"
+  },
+  {
+    "sensorId": 432,
+    "imageUrl": "sensor_1",
+    "name": "Sensor_3",
+    "model": "DSAS-121"
+  },
+  {
+    "sensorId": 442,
+    "imageUrl": "sensor_2",
+    "name": "Sensor_4",
+    "model": "KFLW-812"
+  },
+  {
+    "sensorId": 452,
+    "imageUrl": "sensor_1",
+    "name": "Sensor_5",
+    "model": "DSWQ-6412"
+  },
+  {
+    "sensorId": 352,
+    "imageUrl": "sensor_2",
+    "name": "Sensor_6",
+    "model": "DsdQ-6412"
+  }
+]
