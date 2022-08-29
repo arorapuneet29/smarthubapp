@@ -3,36 +3,48 @@
     "sensorId": 412,
     "imageUrl": "sensor_1",
     "name": "Sensor_1",
-    "model": "TX-232"
+    "model": "TX-232",
+    "bgImageUrl": "pic_1",
+    "slot": "001"
   },
   {
     "sensorId": 422,
     "imageUrl": "sensor_2",
     "name": "Sensor_2",
-    "model": "WSSA-123"
+    "model": "WSSA-123",
+    "bgImageUrl": "pic_3",
+    "slot": "071"
   },
   {
     "sensorId": 432,
     "imageUrl": "sensor_1",
     "name": "Sensor_3",
-    "model": "DSAS-121"
+    "model": "DSAS-121",
+    "bgImageUrl": "pic_2",
+    "slot": "201"
   },
   {
     "sensorId": 442,
     "imageUrl": "sensor_2",
     "name": "Sensor_4",
-    "model": "KFLW-812"
+    "model": "KFLW-812",
+    "bgImageUrl": "pic_1",
+    "slot": "041"
   },
   {
     "sensorId": 452,
     "imageUrl": "sensor_1",
     "name": "Sensor_5",
-    "model": "DSWQ-6412"
+    "model": "DSWQ-6412",
+    "bgImageUrl": "pic_2",
+    "slot": "081"
   },
   {
     "sensorId": 352,
     "imageUrl": "sensor_2",
     "name": "Sensor_6",
-    "model": "DsdQ-6412"
+    "model": "DsdQ-6412",
+    "bgImageUrl": "pic_3",
+    "slot": "021"
   }
 ]

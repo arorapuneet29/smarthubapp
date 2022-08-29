@@ -1,23 +1,34 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, TouchableHighlight, View } from 'react-native'
 
 import Text from '../Text/Text'
 import scale from '../../utils/scale'
 import colors from '../../theme/colors'
+import Menu from '../Menu'
 
 function ListItem({
-  title, subTitle, LeftIcon, RightIcon,
+  title,
+  subTitle,
+  LeftIcon,
+  RightIcon,
+  onPress,
+  onSensorRemove,
+  ...otherProps
 }) {
   return (
     <View style={styles.container}>
-      {LeftIcon}
-      {title && (
-        <View style={styles.texts}>
-          <Text style={styles.title} content={title} />
-          <Text style={styles.subTitle} content={subTitle} />
+      <TouchableHighlight underlayColor={colors.lightGray} onPress={onPress}>
+        <View style={styles.container}>
+          {LeftIcon}
+          {title && (
+            <View style={styles.texts}>
+              <Text style={styles.title} content={title} numberOfLines={1} />
+              <Text style={styles.subTitle} content={subTitle} />
+            </View>
+          )}
         </View>
-      )}
-      {RightIcon}
+      </TouchableHighlight>
+      {RightIcon && <Menu onRemove={onSensorRemove} {...otherProps} />}
     </View>
   )
 }
@@ -26,9 +37,10 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'flex-start',
   },
   texts: {
-    maxWidth: scale(260),
+    width: scale(240),
   },
   title: {
     fontSize: scale(16),

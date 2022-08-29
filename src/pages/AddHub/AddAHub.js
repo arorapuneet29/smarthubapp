@@ -17,9 +17,21 @@ function AddAHub({ route, navigation }) {
     name: Yup.string().required().label('Hub name'),
   })
   const { phoneNo, serialNo } = route.params
+  const randomId = parseInt(Math.random() * 1000, 10)
 
   const onSubmit = ({ name }) => {
-    store.dispatch(addHub({ data: { phoneNo, serialNo, hubName: name } }))
+    store.dispatch(
+      addHub({
+        data: {
+          phoneNo,
+          serialNo,
+          hubName: name,
+          hubId: randomId,
+          hubImageUrl: 'http://',
+          sensors: [],
+        },
+      }),
+    )
     navigation.navigate('Home')
   }
   return (

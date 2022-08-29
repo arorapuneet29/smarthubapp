@@ -32,6 +32,17 @@ class Modal extends React.Component {
     this.setState({ content: details?.initial })
   }
 
+  componentDidUpdate(prevProps) {
+    const { details } = this.props
+    if (
+      details?.initial.specialKey === 'removeSensor'
+      && details?.initial.title !== prevProps.details.initial.title
+    ) {
+      const timer = setInterval(this.tick, 1000)
+      this.setState({ content: details?.initial, timer })
+    }
+  }
+
   componentWillUnmount() {
     const { timer } = this.state
     clearInterval(timer)
@@ -39,6 +50,7 @@ class Modal extends React.Component {
 
   tick = () => {
     const { details } = this.props
+
     const { counter, content } = this.state
     this.setState((prevState) => ({ counter: prevState.counter + 10 }))
 
@@ -84,10 +96,13 @@ class Modal extends React.Component {
         borderRadius: 20,
         backgroundColor: colors.darkBlue,
       },
-      bodyText: {
+      bodyTexts: {
         justifyContent: 'center',
         alignItems: 'center',
-        paddingVertical: scale(15),
+        padding: scale(5),
+      },
+      bodyText: {
+        marginBottom: scale(10),
       },
       iconContainer: {
         width: 60,
@@ -125,13 +140,17 @@ class Modal extends React.Component {
         alignItems: 'center',
         height: scale(60),
         borderColor: colors.lightGray,
-        borderWidth: 3,
+        borderWidth: 2,
       },
       extrBtnText: {
         color: colors.darkBlue,
         fontSize: scale(16),
         textAlign: 'center',
         textTransform: 'uppercase',
+      },
+      footerText: {
+        textAlign: 'center',
+        marginHorizontal: scale(10),
       },
     })
     const { modalVisible, onNavigate } = this.props
@@ -145,7 +164,7 @@ class Modal extends React.Component {
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.heading} content={content?.title} />
-              <Text content={content?.subTitle} />
+              {content?.subTitle && <Text content={content?.subTitle} />}
               {content?.icon && (
                 <View style={styles.iconContainer}>
                   <MaterialCommunityIcons
@@ -156,10 +175,10 @@ class Modal extends React.Component {
                 </View>
               )}
               {content?.bodyText && (
-                <View style={styles.bodyText}>
+                <View style={styles.bodyTexts}>
                   {content.bodyText?.map((text) => (
                     <View key={text}>
-                      <Text content={text} />
+                      <Text content={text} style={styles.bodyText} />
                     </View>
                   ))}
                 </View>
@@ -178,7 +197,7 @@ class Modal extends React.Component {
                 <View style={styles.bodyText}>
                   {content.footerText?.map((text) => (
                     <View key={text}>
-                      <Text content={text} />
+                      <Text content={text} style={styles.footerText} />
                     </View>
                   ))}
                 </View>
@@ -192,17 +211,13 @@ class Modal extends React.Component {
               ))}
               {(content?.accept || content?.reject) && (
                 <View style={styles.actionButton}>
-                  <TouchableOpacity
-                    onPress={() => onNavigate(content.reject.url)}
-                  >
+                  <TouchableOpacity onPress={content.reject.onPress}>
                     <Text
                       content={content.reject.name}
                       style={styles.rejectText}
                     />
                   </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() => onNavigate(content.accept.url)}
-                  >
+                  <TouchableOpacity onPress={content.accept.onPress}>
                     <Text
                       content={content.accept.name}
                       style={styles.acceptText}

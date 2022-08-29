@@ -13,6 +13,7 @@ const colors = {
   darkBlue: '#303786',
   grayBg: '#e6e6e6',
   continueText: '#9094cc',
+  black: '#434343',
 }
 
 export default colors

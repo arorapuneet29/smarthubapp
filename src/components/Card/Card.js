@@ -9,8 +9,11 @@ import AppIcon from '../AppIcon'
 import images from '../../theme/images'
 
 function Card(props) {
-  const { imageUrl, name, model } = props
+  const {
+    imageUrl, name, model, hubId,
+  } = props
   const navigation = useNavigation()
+  const randomId = parseInt(Math.random() * 1000, 10)
   return (
     <ImageBackground
       source={images[imageUrl]}
@@ -25,7 +28,11 @@ function Card(props) {
         <Text content="Add this" style={styles.addHubText} />
         <AppIcon
           iconName="plus"
-          onPress={() => navigation.navigate('addsensor', { ...props })}
+          onPress={() => navigation.navigate('addsensor', {
+            ...props,
+            hubId,
+            sensorId: randomId,
+          })}
         />
       </View>
     </ImageBackground>

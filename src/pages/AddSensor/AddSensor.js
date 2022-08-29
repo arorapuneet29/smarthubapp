@@ -2,15 +2,20 @@ import React, { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import * as Yup from 'yup'
 
+import { useSelector } from 'react-redux'
 import Screen from '../../components/Screen'
 import Text from '../../components/Text'
 import { AppFormField, Form, SubmitForm } from '../../components/form'
 import scale from '../../utils/scale'
 import colors from '../../theme/colors'
 import Modal from '../../components/Modal'
+import { addSensor } from '../../slices/app.slice'
+import store from '../../utils/store'
 
 function AddSensor({ navigation, route }) {
   const { name } = route.params
+  const { hub } = useSelector((state) => state.app)
+
   const validationSchema = Yup.object().shape({
     sensorName: Yup.string().required().label('Sensor Name').max(64),
     message: Yup.string().required().label('Custom message').max(160),
@@ -47,12 +52,42 @@ function AddSensor({ navigation, route }) {
         ],
       },
     }
+
     setModal(values)
     setSensor({ sensorName, message, name })
   }
   const onNavigate = (path) => {
     setModal(initial)
-    navigation.navigate(path, { ...sensor })
+    const {
+      sensorId, hubId, imageUrl, model, bgImageUrl, slot,
+    } = route.params
+    const { sensorName, message } = sensor
+    const today = new Date()
+    const date = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`
+    store.dispatch(
+      addSensor({
+        data: {
+          hubId,
+          sensorDetails: {
+            sensorId,
+            imageUrl,
+            bgImageUrl,
+            model,
+            message,
+            sensorName,
+            slot,
+            registeredDate: date,
+            armed: false,
+            masterRemoteController: false,
+            active: true,
+          },
+        },
+      }),
+    )
+
+    const hubDetails = hub?.filter((item) => item.hubId === hubId)
+
+    navigation.navigate(path, { hubId, sensors: hubDetails[0]?.sensors })
   }
   return (
     <Screen style={styles.screen}>

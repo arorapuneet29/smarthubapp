@@ -5,6 +5,9 @@ const images = {
   logo_lg: require('../../assets/images/logo-lg.png'),
   sensor_1: require('../../assets/images/sensors/sensor_1.png'),
   sensor_2: require('../../assets/images/sensors/sensor_2.png'),
+  pic_1: require('../../assets/images/sensors/bedroom.jpg'),
+  pic_2: require('../../assets/images/sensors/bedroom_2.jpg'),
+  pic_3: require('../../assets/images/sensors/bedroom_3.jpg'),
 }
 
 // image preloading

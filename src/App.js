@@ -6,6 +6,7 @@ import 'utils/ignore'
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
 import { Provider as PaperProvider } from 'react-native-paper'
+import { MenuProvider } from 'react-native-popup-menu'
 
 // assets
 import { imageAssets } from 'theme/images'
@@ -31,7 +32,9 @@ const App = () => {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <PaperProvider>
-          <Navigator />
+          <MenuProvider>
+            <Navigator />
+          </MenuProvider>
         </PaperProvider>
       </PersistGate>
     </Provider>

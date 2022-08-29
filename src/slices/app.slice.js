@@ -62,13 +62,14 @@ const appSlice = createSlice({
         let hubDetails
         if (hub.hubId === payload.data?.hubId) {
           const sensors = hub?.sensors?.filter(
-            (sensor) => sensor?.id !== payload.data?.sensorId,
+            (sensor) => sensor?.sensorId !== payload.data?.sensorId,
           )
           hubDetails = hub
           hubDetails.sensors = sensors
         }
         return hubDetails || hub
       })
+
       state.hub = hubs
     },
   },

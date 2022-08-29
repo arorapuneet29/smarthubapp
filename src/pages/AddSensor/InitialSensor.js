@@ -12,7 +12,7 @@ import scale from '../../utils/scale'
 import AppIcon from '../../components/AppIcon/AppIcon'
 import { ListItem } from '../../components/ListItem'
 
-function InitialSensor({ navigation }) {
+function InitialSensor({ navigation, route }) {
   const initialLists = [
     {
       id: 1,
@@ -67,7 +67,9 @@ function InitialSensor({ navigation }) {
           </View>
         </View>
       ))}
-      <TouchableOpacity onPress={() => navigation.navigate('sensors')}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('sensors', { ...route.params })}
+      >
         <View style={styles.start}>
           <Text content="Get Started" style={styles.startText} />
           <AppIcon iconName="angle-right" color={colors.darkBlue} size={18} />

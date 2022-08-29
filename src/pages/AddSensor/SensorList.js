@@ -6,13 +6,13 @@ import Card from '../../components/Card/Card'
 import Screen from '../../components/Screen'
 import scale from '../../utils/scale'
 
-function SensorList() {
+function SensorList({ route }) {
   return (
     <Screen style={styles.screen}>
       <View style={styles.container}>
         {sensors?.map((sensor) => (
           <View key={sensor.sensorId} style={styles.card}>
-            <Card {...sensor} />
+            <Card {...sensor} hubId={route.params?.hubId} />
           </View>
         ))}
       </View>

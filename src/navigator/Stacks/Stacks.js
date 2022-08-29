@@ -13,6 +13,7 @@ import Hub from '../../pages/Hub'
 import ManageSensor from '../../pages/ManageSensor'
 import AppIcon from '../../components/AppIcon/AppIcon'
 import { InitialSensor, SensorList, AddSensor } from '../../pages/AddSensor'
+import SensorDetails from '../../pages/SensorDetails/SensorDetails'
 
 // ------------------------------------
 // Constants
@@ -94,13 +95,13 @@ export const HomeNavigator = () => (
     <Stack.Screen
       name="ManageSensor"
       component={ManageSensor}
-      options={({ navigation }) => ({
+      options={({ navigation, route }) => ({
         title: 'Manage Sensor',
         headerRight: () => (
           <View style={{ marginRight: 13 }}>
             <AppIcon
               iconName="plus"
-              onPress={() => navigation.navigate('initialSensor')}
+              onPress={() => navigation.navigate('initialSensor', { ...route.params })}
             />
           </View>
         ),
@@ -121,6 +122,13 @@ export const HomeNavigator = () => (
       name="addsensor"
       component={AddSensor}
       options={{ title: 'Add A Sensor' }}
+    />
+    <Stack.Screen
+      name="sensor"
+      component={SensorDetails}
+      options={({ route }) => ({
+        title: route.params?.sensorName,
+      })}
     />
   </Stack.Navigator>
 )
