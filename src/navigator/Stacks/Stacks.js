@@ -14,6 +14,7 @@ import ManageSensor from '../../pages/ManageSensor'
 import AppIcon from '../../components/AppIcon/AppIcon'
 import { InitialSensor, SensorList, AddSensor } from '../../pages/AddSensor'
 import SensorDetails from '../../pages/SensorDetails/SensorDetails'
+import SensorAppBar from '../../components/SensorAppBar/SensorAppBar'
 
 // ------------------------------------
 // Constants
@@ -50,12 +51,21 @@ export const HomeNavigator = () => (
       //   headerLeft: () => <HeaderLeft navigation={navigation} />,
       //   headerTitle: () => <HeaderTitle />,
       // })}
-      options={({ navigation }) => ({
+      options={() => ({
         title: 'Home',
         // headerLeft: () => <HeaderLeft navigation={navigation} />,
-        header: () => (
-          <AppBar navigation={navigation} title="Home" plus setting />
-        ),
+        // header: () => (
+        //   <AppBar navigation={navigation} title="Home" plus setting />
+        // ),
+        // headerRight: () => (
+        //   <View style={{ marginRight: 13 }}>
+        //     <AppIcon
+        //       iconName="plus"
+        //       color='red'
+        //       onPress={() => navigation.navigate('initialSensor', { ...route.params })}
+        //     />
+        //   </View>
+        // ),
       })}
     />
     <Stack.Screen
@@ -121,13 +131,16 @@ export const HomeNavigator = () => (
     <Stack.Screen
       name="addsensor"
       component={AddSensor}
-      options={{ title: 'Add A Sensor' }}
+      options={({ route }) => ({
+        title: route?.params?.sensorName ? 'Edit Sensor' : 'Add A Sensor',
+      })}
     />
     <Stack.Screen
       name="sensor"
       component={SensorDetails}
       options={({ route }) => ({
         title: route.params?.sensorName,
+        headerRight: () => <SensorAppBar />,
       })}
     />
   </Stack.Navigator>

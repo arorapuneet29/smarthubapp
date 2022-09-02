@@ -17,7 +17,7 @@ function AppIcon({
   imageStyle,
 }) {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity onPress={onPress} disabled={!onPress}>
       <View style={[baseStyle, styles.container]}>
         {iconName && (
           <FontIcon

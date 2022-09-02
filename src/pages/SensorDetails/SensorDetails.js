@@ -1,25 +1,43 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   ImageBackground, StyleSheet, Switch, View,
 } from 'react-native'
+import { useSelector } from 'react-redux'
 
 import AppIcon from '../../components/AppIcon'
 import Screen from '../../components/Screen'
 import Text from '../../components/Text'
+import { updateSensor } from '../../slices/app.slice'
 import colors from '../../theme/colors'
 import images from '../../theme/images'
+import sensorInfo from '../../utils/main'
 import scale from '../../utils/scale'
+import store from '../../utils/store'
 
 function SensorDetails({ route }) {
-  const {
-    slot, registeredDate, model, message, bgImageUrl,
-  } = route.params
-  const [toggleSwitch, setToggleSwitch] = useState({ one: false, two: false })
+  const { hub } = useSelector((state) => state.app)
+  const { hubId, sensorId } = route.params
+
+  const details = sensorInfo(hub, hubId, sensorId)
+
+  const onChange = (field, value) => {
+    const latestValue = { ...details }
+    latestValue[field] = value
+    store.dispatch(
+      updateSensor({
+        data: {
+          hubId: route.params?.hubId,
+          sensorDetails: { ...latestValue },
+        },
+      }),
+    )
+  }
+
   return (
     <Screen style={styles.container}>
       <ImageBackground
         style={styles.sensorImage}
-        source={images[bgImageUrl || 'pic_2']}
+        source={images[details?.bgImageUrl || 'pic_2']}
         resizeMode="cover"
       >
         <View style={styles.overlay}>
@@ -30,18 +48,18 @@ function SensorDetails({ route }) {
       <View style={styles.contentContainer}>
         <View style={styles.content}>
           <Text content="Sensor Slot" />
-          <Text content={slot || '001'} style={styles.valueText} />
+          <Text content={details?.slot || '001'} style={styles.valueText} />
         </View>
         <View style={styles.content}>
           <Text content="Sensor Registered on" />
           <Text
-            content={registeredDate || '2022-02-22'}
+            content={details?.registeredDate || '2022-02-22'}
             style={styles.valueText}
           />
         </View>
         <View style={styles.content}>
           <Text content="Sensor Model" />
-          <Text content={model || 'TX-231'} style={styles.valueText} />
+          <Text content={details?.model || 'TX-231'} style={styles.valueText} />
         </View>
 
         <View style={[styles.content, { flexDirection: 'column' }]}>
@@ -49,7 +67,7 @@ function SensorDetails({ route }) {
           <Text
             style={styles.message}
             content={
-              message
+              details?.message
               || "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type"
             }
           />
@@ -62,8 +80,11 @@ function SensorDetails({ route }) {
               content="This sensor is currently not being controled by the master remote"
             />
             <Switch
-              value={toggleSwitch.one}
-              onChange={() => setToggleSwitch({ ...toggleSwitch, one: !toggleSwitch.one })}
+              value={details?.masterRemoteController}
+              onChange={() => onChange(
+                'masterRemoteController',
+                !details.masterRemoteController,
+              )}
               style={styles.switch}
               thumbColor={colors.darkBlue}
               trackColor={colors.darkBlue}
@@ -78,8 +99,8 @@ function SensorDetails({ route }) {
               content="This sensor is currently permanently disarmed, and will not  trigger if the amster remote is armed"
             />
             <Switch
-              value={toggleSwitch.two}
-              onChange={() => setToggleSwitch({ ...toggleSwitch, two: !toggleSwitch.two })}
+              value={details?.armed}
+              onChange={() => onChange('armed', !details.armed)}
               style={styles.switch}
               thumbColor={colors.darkBlue}
               trackColor={colors.darkBlue}

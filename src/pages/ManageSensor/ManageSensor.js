@@ -10,6 +10,7 @@ import scale from '../../utils/scale'
 import Modal from '../../components/Modal/Modal'
 import { removeSensor } from '../../slices/app.slice'
 import store from '../../utils/store'
+import ListItemEmpty from '../../components/ListItem/ListItemEmpty'
 
 function ManageSensor({ route, navigation }) {
   const { hubId } = route.params
@@ -86,6 +87,19 @@ function ManageSensor({ route, navigation }) {
     }
     setModal(values)
   }
+
+  const onEditSensor = (sensorId, closeMenu) => {
+    closeMenu()
+    const sensorDetails = sensorList?.filter(
+      (sensor) => sensor?.sensorId === sensorId,
+    )
+    navigation.navigate('addsensor', {
+      ...sensorDetails[0],
+      editMode: true,
+      hubId,
+    })
+  }
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -95,10 +109,12 @@ function ManageSensor({ route, navigation }) {
         renderItem={({ item }) => (
           <ListItem
             {...item}
+            hubId={hubId}
             title={item?.sensorName}
             subTitle={item?.model}
+            onEdit={onEditSensor}
             onSensorRemove={onRemoveConfirm}
-            onPress={() => navigation.navigate('sensor', { ...item })}
+            onPress={() => navigation.navigate('sensor', { ...item, hubId })}
             LeftIcon={(
               <AppIcon
                 baseStyle={styles.imageContainer}
@@ -109,6 +125,7 @@ function ManageSensor({ route, navigation }) {
             RightIcon
           />
         )}
+        ListEmptyComponent={ListItemEmpty}
       />
       {modal.visible && (
         <Modal

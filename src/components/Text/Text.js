@@ -4,7 +4,7 @@ import { StyleSheet, Text as BaseText } from 'react-native'
 import { colors } from 'theme'
 import scale from '../../utils/scale'
 
-function Text({ content, style = {}, numberOfLines }) {
+function Text({ content, style, numberOfLines }) {
   return (
     <BaseText numberOfLines={numberOfLines} style={[styles.content, style]}>
       {content}

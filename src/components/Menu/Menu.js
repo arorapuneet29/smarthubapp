@@ -6,14 +6,30 @@ import {
   MenuOption,
   MenuTrigger,
 } from 'react-native-popup-menu'
+
+import store from '../../utils/store'
 import colors from '../../theme/colors'
 import scale from '../../utils/scale'
 import AppIcon from '../AppIcon'
 import Text from '../Text/Text'
+import { updateSensor } from '../../slices/app.slice'
 
-function Menu({ onRemove, sensorId }) {
+function Menu({
+  onRemove, onEdit, sensorId, ...otherProps
+}) {
   const [open, setOpen] = useState(false)
-  const [toggleSwitch, setToggleSwitch] = useState(false)
+  const onChange = (field, value) => {
+    const latestValue = { ...otherProps, sensorId }
+    latestValue[field] = value
+    store.dispatch(
+      updateSensor({
+        data: {
+          hubId: otherProps?.hubId,
+          sensorDetails: { ...latestValue },
+        },
+      }),
+    )
+  }
 
   const onClose = () => setOpen(!open)
   return (
@@ -29,7 +45,10 @@ function Menu({ onRemove, sensorId }) {
           />
         </MenuTrigger>
         <MenuOptions optionsContainerStyle={styles.options}>
-          <MenuOption style={styles.option}>
+          <MenuOption
+            style={styles.option}
+            onSelect={() => onEdit(sensorId, onClose)}
+          >
             <AppIcon
               iconStyle={styles.icon}
               color={colors.gray}
@@ -53,8 +72,11 @@ function Menu({ onRemove, sensorId }) {
             />
             <Text content="master control" style={styles.optionText} />
             <Switch
-              value={toggleSwitch}
-              onChange={() => setToggleSwitch(!toggleSwitch)}
+              value={otherProps?.masterRemoteController}
+              onChange={() => onChange(
+                'masterRemoteController',
+                !otherProps.masterRemoteController,
+              )}
               style={styles.switch}
               thumbColor={colors.darkBlue}
               trackColor={colors.darkBlue}

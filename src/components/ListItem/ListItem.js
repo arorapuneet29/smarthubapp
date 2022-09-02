@@ -13,6 +13,7 @@ function ListItem({
   RightIcon,
   onPress,
   onSensorRemove,
+  onEdit,
   ...otherProps
 }) {
   return (
@@ -28,7 +29,9 @@ function ListItem({
           )}
         </View>
       </TouchableHighlight>
-      {RightIcon && <Menu onRemove={onSensorRemove} {...otherProps} />}
+      {RightIcon && (
+        <Menu onEdit={onEdit} onRemove={onSensorRemove} {...otherProps} />
+      )}
     </View>
   )
 }

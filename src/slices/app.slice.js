@@ -72,6 +72,26 @@ const appSlice = createSlice({
 
       state.hub = hubs
     },
+    updateSensor: (state, { payload }) => {
+      const { hubId, sensorDetails } = payload.data
+
+      const hubs = state.hub.filter((hub) => {
+        let hubDetails
+        if (hub.hubId === hubId) {
+          const sensors = hub.sensors?.filter(
+            (previous) => previous?.sensorId !== sensorDetails?.sensorId,
+          )
+
+          sensors.push(sensorDetails)
+
+          hubDetails = hub
+          hubDetails.sensors = sensors
+        }
+        return hubDetails || hub
+      })
+
+      state.hub = hubs
+    },
   },
 })
 
@@ -83,6 +103,7 @@ export const {
   addHub,
   addSensor,
   removeSensor,
+  updateSensor,
 } = appSlice.actions
 
 export default appSlice.reducer

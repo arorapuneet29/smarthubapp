@@ -1,5 +1,10 @@
 import React from 'react'
-import { StyleSheet, View, ImageBackground } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  ImageBackground,
+  TouchableOpacity,
+} from 'react-native'
 
 import { useNavigation } from '@react-navigation/native'
 import scale from '../../utils/scale'
@@ -24,17 +29,19 @@ function Card(props) {
         <Text content={name} style={styles.sensorName} numberOfLines={1} />
         <Text content={model} />
       </View>
-      <View style={styles.addHubBtn}>
-        <Text content="Add this" style={styles.addHubText} />
-        <AppIcon
-          iconName="plus"
-          onPress={() => navigation.navigate('addsensor', {
-            ...props,
-            hubId,
-            sensorId: randomId,
-          })}
-        />
-      </View>
+      <TouchableOpacity
+        style={styles.btnContainer}
+        onPress={() => navigation.navigate('addsensor', {
+          ...props,
+          hubId,
+          sensorId: randomId,
+        })}
+      >
+        <View style={styles.addHubBtn}>
+          <Text content="Add this" style={styles.addHubText} />
+          <AppIcon iconName="plus" />
+        </View>
+      </TouchableOpacity>
     </ImageBackground>
   )
 }
@@ -53,15 +60,13 @@ const styles = StyleSheet.create({
     fontSize: scale(16),
     fontWeight: '600',
   },
+  btnContainer: { position: 'absolute', bottom: 0, width: '100%' },
   addHubBtn: {
     backgroundColor: colors.darkBlue,
     height: scale(40),
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
   },
   addHubText: {
     color: colors.white,
