@@ -9,7 +9,7 @@ import images from '../../theme/images'
 import scale from '../../utils/scale'
 import Modal from '../../components/Modal/Modal'
 import { removeSensor } from '../../slices/app.slice'
-import store from '../../utils/store'
+import store from '../../slices/store'
 import ListItemEmpty from '../../components/ListItem/ListItemEmpty'
 
 function ManageSensor({ route, navigation }) {

@@ -3,8 +3,8 @@ import { NavigationContainer } from '@react-navigation/native'
 import { useSelector, useDispatch } from 'react-redux'
 import IntroScreen from 'pages/Intro'
 import { authenticate } from 'slices/app.slice'
+import TabNavigator from '../components/Tabs'
 
-import DrawerNavigator from './Drawer'
 import { InitialNavigator } from './Stacks/Stacks'
 // import { HomeNavigator, ProfileNavigator } from './Stacks'
 
@@ -21,11 +21,7 @@ const Navigator = () => {
 
   return checked ? (
     <NavigationContainer>
-      {hub?.length === 0 || hub === 1 ? (
-        <InitialNavigator />
-      ) : (
-        <DrawerNavigator />
-      )}
+      {hub?.length === 0 || hub === 1 ? <InitialNavigator /> : <TabNavigator />}
     </NavigationContainer>
   ) : (
     <IntroScreen />

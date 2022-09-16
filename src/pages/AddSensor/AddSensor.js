@@ -10,7 +10,7 @@ import scale from '../../utils/scale'
 import colors from '../../theme/colors'
 import Modal from '../../components/Modal'
 import { addSensor, updateSensor } from '../../slices/app.slice'
-import store from '../../utils/store'
+import store from '../../slices/store'
 
 function AddSensor({ navigation, route }) {
   const { name } = route.params

@@ -7,7 +7,7 @@ import {
   MenuTrigger,
 } from 'react-native-popup-menu'
 
-import store from '../../utils/store'
+import store from '../../slices/store'
 import colors from '../../theme/colors'
 import scale from '../../utils/scale'
 import AppIcon from '../AppIcon'

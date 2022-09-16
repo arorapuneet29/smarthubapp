@@ -5,7 +5,7 @@ import FontIcon from 'react-native-vector-icons/FontAwesome5'
 import { colors } from 'theme'
 
 // stack navigators
-import { HomeNavigator, ProfileNavigator } from '../Stacks'
+import { HomeNavigator, ProfileNavigator } from '../../navigator/Stacks'
 
 const Tab = createBottomTabNavigator()
 

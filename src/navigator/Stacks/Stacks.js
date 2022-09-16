@@ -46,42 +46,14 @@ export const HomeNavigator = () => (
     <Stack.Screen
       name="Home"
       component={Home}
-      // options={({ navigation }) => ({
-      //   title: 'Home',
-      //   headerLeft: () => <HeaderLeft navigation={navigation} />,
-      //   headerTitle: () => <HeaderTitle />,
-      // })}
       options={() => ({
         title: 'Home',
-        // headerLeft: () => <HeaderLeft navigation={navigation} />,
-        // header: () => (
-        //   <AppBar navigation={navigation} title="Home" plus setting />
-        // ),
-        // headerRight: () => (
-        //   <View style={{ marginRight: 13 }}>
-        //     <AppIcon
-        //       iconName="plus"
-        //       color='red'
-        //       onPress={() => navigation.navigate('initialSensor', { ...route.params })}
-        //     />
-        //   </View>
-        // ),
       })}
     />
     <Stack.Screen
       name="AddHub"
       component={AddHub}
-      // navigation.navigate('Details', { from: 'Home' })
-      // options={({ navigation }) => ({
-      //   title: 'Home',
-      //   headerLeft: () => <HeaderLeft navigation={navigation} />,
-      //   headerTitle: () => <HeaderTitle />,
-      // })}
-      screenOptions={{
-        header: ({ navigation }) => (
-          <AppBar navigation={navigation} title="Add Hub" back plus />
-        ),
-      }}
+      options={{ title: 'Add A Sensor' }}
     />
     <Stack.Screen
       name="AddAHub"
@@ -111,7 +83,9 @@ export const HomeNavigator = () => (
           <View style={{ marginRight: 13 }}>
             <AppIcon
               iconName="plus"
-              onPress={() => navigation.navigate('initialSensor', { ...route.params })}
+              onPress={() =>
+                navigation.navigate('initialSensor', { ...route.params })
+              }
             />
           </View>
         ),
@@ -155,33 +129,9 @@ export const ProfileNavigator = () => (
     <Stack.Screen
       name="SelectHub"
       component={SelectHub}
-      options={({ navigation }) => ({
+      options={() => ({
         title: 'Home',
-        // headerLeft: () => <HeaderLeft navigation={navigation} />,
-        header: () => (
-          <AppBar
-            navigation={navigation}
-            title="Select your hub"
-            back
-            plus
-            setting
-          />
-        ),
       })}
-      // screenOptions={{
-      //   header: ({ navigation }) => (
-      //     <AppBar
-      //       navigation={navigation}
-      //       title="Select your hub"
-      //       back
-      //       plus
-      //       setting
-      //     />
-      //   ),
-      // }}
-      // screenOptions={{
-      //   header: (props) => <AppBar {...props} />,
-      // }}
     />
     <Stack.Screen
       name="Profile"

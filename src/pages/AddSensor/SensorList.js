@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import sensors from '../../../assets/fake/sensors.json'
+import sensors from '../../../assets/mock/sensors.json'
 import Card from '../../components/Card/Card'
 
 import Screen from '../../components/Screen'

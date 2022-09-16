@@ -9,7 +9,7 @@ import Text from '../../components/Text'
 import { AppFormField, Form, SubmitForm } from '../../components/form'
 import colors from '../../theme/colors'
 import { addHub } from '../../slices/app.slice'
-import store from '../../utils/store'
+import store from '../../slices/store'
 import scale from '../../utils/scale'
 
 function AddAHub({ route, navigation }) {

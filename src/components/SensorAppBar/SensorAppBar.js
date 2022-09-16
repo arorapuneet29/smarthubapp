@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import { removeSensor } from '../../slices/app.slice'
 import sensorInfo from '../../utils/main'
-import store from '../../utils/store'
+import store from '../../slices/store'
 import AppIcon from '../AppIcon'
 import Modal from '../Modal/Modal'
 

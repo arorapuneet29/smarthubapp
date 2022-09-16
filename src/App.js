@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { View } from 'react-native'
 import { Provider } from 'react-redux'
-import store from 'utils/store'
+import store from 'slices/store'
 import 'utils/ignore'
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
-import { Provider as PaperProvider } from 'react-native-paper'
 import { MenuProvider } from 'react-native-popup-menu'
 
 // assets
@@ -31,11 +30,9 @@ const App = () => {
   return didLoad ? (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <PaperProvider>
-          <MenuProvider>
-            <Navigator />
-          </MenuProvider>
-        </PaperProvider>
+        <MenuProvider>
+          <Navigator />
+        </MenuProvider>
       </PersistGate>
     </Provider>
   ) : (

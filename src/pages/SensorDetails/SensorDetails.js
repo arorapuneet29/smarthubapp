@@ -12,7 +12,7 @@ import colors from '../../theme/colors'
 import images from '../../theme/images'
 import sensorInfo from '../../utils/main'
 import scale from '../../utils/scale'
-import store from '../../utils/store'
+import store from '../../slices/store'
 
 function SensorDetails({ route }) {
   const { hub } = useSelector((state) => state.app)
